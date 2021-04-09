@@ -16,16 +16,19 @@
     }
     const children1 = {children: 'Hello World'}
     const children2 = {children: 'Goodbye World'}
+    
     const element = (
       <div className="container">
         {message(children1)}
         {message(children2)}
+        {React.createElement(message, {children: 'Hello World another way'})}
       </div>
     )
 
 
     
     // 💯 This is only the first step to making actual React components. The rest is in the extra credit!
+
     ReactDOM.render(element, document.getElementById('root'))
   </script>
 </body>
