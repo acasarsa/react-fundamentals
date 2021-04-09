@@ -11,17 +11,18 @@
 
     // 🐨 use that function in place of the divs below with:
     // {message({children: 'Hello World'})} {message({children: 'Goodbye World'})}
-    const element = (
-      <div className="container">
-        {message({children: 'Hello World'})} 
-        {message({children: 'Goodbye World'})}
-        {React.createElement(message, {children: 'Using create element ags'})}
-      </div>
-    )
-
     function message({children}) {
       return <div className='message'>{children}</div>
     }
+    const children1 = {children: 'Hello World'}
+    const children2 = {children: 'Goodbye World'}
+    const element = (
+      <div className="container">
+        {message(children1)}
+        {message(children2)}
+      </div>
+    )
+
 
     
     // 💯 This is only the first step to making actual React components. The rest is in the extra credit!
