@@ -6,25 +6,80 @@
   <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  
   <script type="text/babel">
+  
     // 🐨 Make a function called `message` which returns the JSX we want to share
 
     // 🐨 use that function in place of the divs below with:
     // {message({children: 'Hello World'})} {message({children: 'Goodbye World'})}
-    const element = (
-      <div className="container">
-        {message({children: 'Hello World'})} 
-        {message({children: 'Goodbye World'})}
-        {React.createElement(message, {children: 'Using create element ags'})}
-      </div>
-    )
-
-    function message({children}) {
+    function Message({children}) {
       return <div className='message'>{children}</div>
     }
 
+    function List({children}){
+      return <li>{children}</li>
+    }
+
+    function RedDiv({children}){
+      return <div style={{backgroundColor: 'violet'}}>{children}</div>
+    }
+    function BlueDiv({children}){
+      return <ol style={{backgroundColor: 'lightblue'}}>{children}</ol>
+    }
+    const children1 = {children: 'Hello World'}
+    const children2 = {children: 'Goodbye World'}
+    
+    function NewMsg({subject, greeting}){
+      return (
+        <div className="message">
+          {greeting} -- {subject}
+        </div>
+      )
+    }
+
+    function FavoriteNumber({faveNum}){
+      return <div>My Favorite number is: {faveNum}</div>
+    }
+
+    // const PropTypes = {
+    //   number(props, propName, componentName) {
+    //     if (typeof props[propName] !== 'number'){
+    //       return new Error('Some useful error message here')
+    //     }
+    //   },
+    // }
+
+    FavoriteNumber.propTypes = {
+      faveNum: PropTypes.number.isRequired
+      // uses the react propType // npm i prop-types
+      // this will throw a warning message in console
+    }
+
+    const element = (
+      <>
+        <div>
+          i'm a div inside a fragment
+        </div>
+        <RedDiv className="container">
+          {Message(children1)}
+          <BlueDiv>
+            <List>Oh hey I made a List Component</List>
+            <List>Oh hey I made a List Component</List>
+            <NewMsg greeting="Hii" subject="Hello"/>
+          </BlueDiv>
+          {Message(children2)}
+          {React.createElement(Message, {children: 'Hello World another way'})}
+          <FavoriteNumber faveNum="not a number"/> 
+          <FavoriteNumber faveNum={1}/>
+        </RedDiv>
+      </>
+      )
     
     // 💯 This is only the first step to making actual React components. The rest is in the extra credit!
+
     ReactDOM.render(element, document.getElementById('root'))
+    
   </script>
 </body>

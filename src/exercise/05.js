@@ -12,16 +12,71 @@ import '../box-styles.css'
 
 // 🐨 add a style prop to each of them as well so their background color
 // matches what the text says it should be as well as `fontStyle: 'italic'`
-const smallBox = <div>small lightblue box</div>
-const mediumBox = <div>medium pink box</div>
-const largeBox = <div>large orange box</div>
+
+// const smallBox = (
+//   <Box 
+//     className="box box--small" 
+//     style={{backgroundColor: 'lightblue'}}
+//     >
+//       small lightblue box
+//   </Box>
+// )
+
+// const mediumBox = <div 
+//   className="box box--medium" 
+//   style={{backgroundColor: 'pink'}}
+//   >
+//   medium pink box
+//   </div>
+  
+// const largeBox = <div 
+//   className="box box--large" 
+//   style={{backgroundColor: 'orange'}}
+//   >
+//   large orange box
+//   </div>
+
+function Box({className = '', style, size, bgColor, ...otherProps}) {
+  const sizeClassName = size ? `box--${size}` : ''
+  const backgroundColor = bgColor ? `${bgColor}` : ''
+  return (
+    <div 
+      className={`box ${className} ${sizeClassName}`} 
+      style={{fontStyle: 'italic', backgroundColor: `${backgroundColor}`, ...style}}
+      {...otherProps}
+      >
+    </div>
+  )
+}
+// creates a custom styling component that takes in css classes and even makes easy className options
 
 function App() {
   return (
     <div>
-      {smallBox}
+      {/* {smallBox}
       {mediumBox}
-      {largeBox}
+      {largeBox} */}
+
+      <Box size='small' bgColor='lightblue'>
+        small lightblue box
+      </Box>
+      <Box size='medium' bgColor='pink'>
+        medium pink box
+      </Box>
+      <Box size='large' bgColor='violet'>
+        large violet box
+      </Box>
+      <Box> sizeless box</Box>
+      {/* <Box className="box--small" style={{backgroundColor: 'lightblue'}}>
+        small lightblue box
+      </Box>
+      <Box className="box--medium" style={{backgroundColor: 'pink'}}>
+        medium pink box
+      </Box>
+      <Box className="box--large" style={{backgroundColor: 'orange'}}>
+        large orange box
+      </Box>
+      <Box> sizeless box</Box> */}
     </div>
   )
 }
